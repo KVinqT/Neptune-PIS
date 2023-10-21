@@ -9,8 +9,8 @@ authRouter.post("/", async (req: Request, res: Response) => {
   if (!userName && !password) return res.sendStatus(400);
   const receptionName = "reception1";
   const receptionPassword = "receptioncounter1";
-  const patientName = "reception1";
-  const patientPassword = "receptioncounter1";
+  const patientName = "patient1";
+  const patientPassword = "patient1";
 
   if (userName === receptionName && password === receptionPassword) {
     const accessToken = jwt.sign(userName, config.jwtSecretReception);
