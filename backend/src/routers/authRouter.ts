@@ -1,22 +1,23 @@
 import express, { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { config } from "../config";
+import { config } from "../config/config";
 
 const authRouter = express.Router();
 
-authRouter.post("/login", async (req: Request, res: Response) => {
-  const { username, password } = req.body;
-  if (!username && !password) return res.sendStatus(400);
+authRouter.post("/", async (req: Request, res: Response) => {
+  const { userName, password } = req.body;
+  console.log(userName, password);
+  if (!userName && !password) return res.sendStatus(400);
   const receptionName = "reception1";
   const receptionPassword = "receptioncounter1";
   const patientName = "reception1";
   const patientPassword = "receptioncounter1";
 
-  if (username === receptionName && password === receptionPassword) {
-    const accessToken = jwt.sign(username, config.jwtSecretReception);
+  if (userName === receptionName && password === receptionPassword) {
+    const accessToken = jwt.sign(userName, config.jwtSecretReception);
     return res.send({ accessToken });
-  } else if (username === patientName && password === patientPassword) {
-    const accessToken = jwt.sign(username, config.jwtSecretPatient);
+  } else if (userName === patientName && password === patientPassword) {
+    const accessToken = jwt.sign(userName, config.jwtSecretPatient);
     return res.send({ accessToken });
   } else return res.sendStatus(401);
 });
