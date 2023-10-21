@@ -19,13 +19,11 @@ const Login = () => {
     console.log(user);
     if (user.userName === patientName && user.password === patientPassword) {
       setError(false);
-      navigate("/");
     } else if (
       user.userName === receptionName &&
       user.password === receptionPassword
     ) {
       setError(false);
-      navigate("/");
     } else if (
       user.userName !== patientName &&
       user.password !== patientPassword
@@ -48,6 +46,7 @@ const Login = () => {
     const data = await response.json();
     const accessToken = data.accessToken;
     localStorage.setItem("accessToken", accessToken);
+    navigate("/");
   };
 
   return (
