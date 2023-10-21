@@ -1,20 +1,32 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [user, setUser] = useState({
     userName: "",
     password: "",
   });
+  const navigate = useNavigate();
+  const [error, setError] = useState(false);
   const userLogin = async () => {
-    await fetch("http://localhost:5000/login", {
+    const response = await fetch("http://localhost:5000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(user),
     });
+    const data = await response.json();
+    const accessToken = data.accessToken;
+    localStorage.setItem("accessToken", accessToken);
+    if (!response.ok) {
+      setError(true);
+    } else {
+      setError(false);
+      navigate("/");
+    }
   };
   return (
     <div className="w-full h-full">
@@ -40,6 +52,7 @@ const Login = () => {
                     }
                   />
                 </div>{" "}
+                <p> {error === true ? "" : "Email is not correct"}</p>
               </div>
               <div className="mt-4">
                 <p className="font-semibold mb-2">Password</p>
