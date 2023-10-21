@@ -6,7 +6,6 @@ const authRouter = express.Router();
 
 authRouter.post("/", async (req: Request, res: Response) => {
   const { userName, password } = req.body;
-  console.log(userName, password);
   if (!userName && !password) return res.sendStatus(400);
   const receptionName = "reception1";
   const receptionPassword = "receptioncounter1";
