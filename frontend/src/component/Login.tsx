@@ -4,13 +4,40 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     userName: "",
     password: "",
   });
-  const navigate = useNavigate();
+
   const [error, setError] = useState(false);
   const userLogin = async () => {
+    const receptionName = "reception1";
+    const receptionPassword = "receptioncounter1";
+    const patientName = "patient1";
+    const patientPassword = "patient1";
+    console.log(user);
+    if (user.userName === patientName && user.password === patientPassword) {
+      setError(false);
+      navigate("/");
+    } else if (
+      user.userName === receptionName &&
+      user.password === receptionPassword
+    ) {
+      setError(false);
+      navigate("/");
+    } else if (
+      user.userName !== patientName &&
+      user.password !== patientPassword
+    ) {
+      setError(true);
+    } else if (
+      user.userName !== receptionName &&
+      user.password !== receptionPassword
+    ) {
+      setError(true);
+    }
+
     const response = await fetch("http://localhost:5000/login", {
       method: "POST",
       headers: {
@@ -21,13 +48,8 @@ const Login = () => {
     const data = await response.json();
     const accessToken = data.accessToken;
     localStorage.setItem("accessToken", accessToken);
-    if (!response.ok) {
-      setError(true);
-    } else {
-      setError(false);
-      navigate("/");
-    }
   };
+
   return (
     <div className="w-full h-full">
       <div className="md:max-w-[800px] md:h-[80vh] rounded-xl absolute left-0 right-0 top-0 bottom-0 m-auto shadow-2xl border-t md:flex md:justify-around items-center">
@@ -52,7 +74,7 @@ const Login = () => {
                     }
                   />
                 </div>{" "}
-                <p> {error === true ? "" : "Email is not correct"}</p>
+                <p> {error === true ? "Username may not be correct" : ""}</p>
               </div>
               <div className="mt-4">
                 <p className="font-semibold mb-2">Password</p>
@@ -67,6 +89,7 @@ const Login = () => {
                     }
                   />
                 </div>{" "}
+                <p> {error === true ? "Password may not be correct" : ""}</p>
               </div>
               <Button
                 onClick={userLogin}
@@ -74,6 +97,12 @@ const Login = () => {
               >
                 Sign In
               </Button>{" "}
+              <p>
+                {" "}
+                {error === true
+                  ? "Username or password is wrong. Check again"
+                  : ""}
+              </p>
             </div>
           </div>
         </div>
