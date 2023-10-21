@@ -1,10 +1,10 @@
 import { Doctor } from "./type";
 
-const doctor: Doctor[] = [
+export const doctor: Doctor[] = [
   {
     id: 1,
     name: "Doctor 1",
-    department: "brain",
+    department: "Brain",
     imageUrl: "",
     experience: "work in bla bla",
     education: "",
@@ -354,7 +354,7 @@ const doctor: Doctor[] = [
   {
     id: 2,
     name: "Doctor 2",
-    department: "brain",
+    department: "Lungs",
     imageUrl: "",
     experience: "work in bla bla",
     education: "",
@@ -704,7 +704,7 @@ const doctor: Doctor[] = [
   {
     id: 3,
     name: "Doctor 3",
-    department: "brain",
+    department: "Eyes",
     imageUrl: "",
     experience: "work in bla bla",
     education: "",
@@ -1404,7 +1404,7 @@ const doctor: Doctor[] = [
   {
     id: 5,
     name: "Doctor 5",
-    department: "heart",
+    department: "Bone",
     imageUrl: "",
     experience: "work in bla bla",
     education: "",
@@ -1754,7 +1754,7 @@ const doctor: Doctor[] = [
   {
     id: 6,
     name: "Doctor 6",
-    department: "heart",
+    department: "Skin",
     imageUrl: "",
     experience: "work in bla bla",
     education: "",
@@ -2105,7 +2105,7 @@ const doctor: Doctor[] = [
   {
     id: 7,
     name: "Doctor 7",
-    department: "nervous",
+    department: "nerve",
     imageUrl: "",
     experience: "work in bla bla",
     education: "",
@@ -2455,7 +2455,7 @@ const doctor: Doctor[] = [
   {
     id: 8,
     name: "Doctor 8",
-    department: "nervous",
+    department: "Teeth",
     imageUrl: "",
     experience: "work in bla bla",
     education: "",
@@ -2805,7 +2805,7 @@ const doctor: Doctor[] = [
   {
     id: 9,
     name: "Doctor 9",
-    department: "nervous",
+    department: "Blood",
     imageUrl: "",
     experience: "work in bla bla",
     education: "",
