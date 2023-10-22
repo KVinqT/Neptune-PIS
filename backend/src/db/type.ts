@@ -31,7 +31,7 @@ export interface Doctor {
 }
 
 export interface Icon {
-  type: React.ComponentType<IconProps>;
+  type: React.ComponentType<any>;
   color: string;
   size: number;
 }
@@ -40,5 +40,4 @@ export interface Departments {
   id: number;
   name: string;
   icon: Icon;
-  route: string;
 }
