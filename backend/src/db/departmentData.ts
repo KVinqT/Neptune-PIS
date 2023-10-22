@@ -67,6 +67,7 @@ export const departments: Departments[] = [
 ];
 
 export const article = [
+  "All",
   "A",
   "B",
   "C",

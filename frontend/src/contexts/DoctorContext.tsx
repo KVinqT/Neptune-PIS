@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 interface DoctorInfo {
   name: [] | null;
@@ -20,13 +20,33 @@ const defaultContext: DoctorInfo = {
 };
 export const DoctorContext = createContext<DoctorInfo>(defaultContext);
 const DoctorProvider = ({ children }: any) => {
+  const accessToken = localStorage.getItem("accessToken");
+  useEffect(() => {
+    if (accessToken) {
+      activeDoctorFetch;
+    }
+  }, [accessToken]);
   const [doctorData, setDoctorData] = useState(defaultContext);
   const activeDoctorFetch = async (todayDate: string) => {
     const response = await fetch(
-      `http://localhost:5000/doctors?today=${todayDate}`
+      `http://localhost:5000/doctors?today=${todayDate}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
     );
     const data = await response.json();
+    const { name, department, experience, education, availability } = data;
     console.log(data);
+    setDoctorData({
+      ...data,
+      name,
+      department,
+      experience,
+      education,
+      availability,
+    });
   };
   return (
     <DoctorContext.Provider
