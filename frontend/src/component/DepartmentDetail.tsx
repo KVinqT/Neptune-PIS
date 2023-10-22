@@ -1,4 +1,4 @@
-import { doctor } from "@/db/doctorData";
+import { doctor } from "@/utils/doctorData";
 import { useParams } from "react-router-dom";
 
 const DepartmentDetail = () => {
