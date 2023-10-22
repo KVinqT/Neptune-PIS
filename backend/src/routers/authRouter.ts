@@ -14,7 +14,7 @@ authRouter.post("/", async (req: Request, res: Response) => {
 
   if (userName === receptionName && password === receptionPassword) {
     const accessToken = jwt.sign(userName, config.jwtSecretReception);
-    return res.send({ accessToken, notOk: false });
+    return res.send({ accessToken });
   } else if (userName === patientName && password === patientPassword) {
     const accessToken = jwt.sign(userName, config.jwtSecretPatient);
     return res.send({ accessToken });

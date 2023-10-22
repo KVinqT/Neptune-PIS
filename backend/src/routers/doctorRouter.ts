@@ -15,7 +15,6 @@ doctorRouter.get("/", checkAuth, (req: Request, res: Response) => {
   const experience = todayDoctor.map((item) => item.experience);
   const education = todayDoctor.map((item) => item.education);
   const availability = todayDoctor.map((item) => item.availability);
-  console.log(name, department, experience, education, availability);
   res.send({
     name,
     department,

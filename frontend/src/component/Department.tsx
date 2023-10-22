@@ -18,10 +18,7 @@ export interface Departments {
 }
 
 const Department = () => {
-  const { department, activeDoctorFetch } = useContext(DoctorContext);
-  useEffect(() => {
-    activeDoctorFetch;
-  }, []);
+  const { department } = useContext(DoctorContext);
   if (!department) return null;
   // const [searchValue, setSearchValue] = useState("");
   // const [origin, setOrigin] = useState(true);
@@ -41,7 +38,7 @@ const Department = () => {
       <div className="flex justify-around "></div>
 
       <div className="flex flex-row flex-wrap justify-between ">
-        {department.map((item: Departments) => {
+        {/* {department.map((item: Departments) => {
           return (
             <div key={item.id}>
               <DepartmentCard
@@ -51,7 +48,7 @@ const Department = () => {
               />
             </div>
           );
-        })}
+        })} */}
       </div>
       <div className="flex flex-row flex-wrap justify-between ">
         {/* {!search &&
