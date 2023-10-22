@@ -5,17 +5,16 @@ import { useParams } from "react-router-dom";
 const DepartmentDetail = () => {
   const params = useParams();
   const accessToken = localStorage.getItem("accessToken");
-  const [notShow, setNotShow] = useState(true);
+
   const departmentId = Number(params.id as string);
   const { allDoctorByEachDepartment, fetchAllDoctor } =
     useContext(DoctorContext);
   useEffect(() => {
     if (accessToken) {
       fetchAllDoctor(departmentId);
-      setNotShow(true);
     }
-  }, [accessToken]);
-  if (notShow) return null;
+  }, [accessToken, allDoctorByEachDepartment]);
+  if (!allDoctorByEachDepartment) return null;
   return (
     <div>
       <p>{departmentId}</p>
