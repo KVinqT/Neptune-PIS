@@ -4,13 +4,31 @@ import { BiSolidBed } from "react-icons/bi";
 import { CiMedicalCross } from "react-icons/ci";
 import { Input } from "@/components/ui/input";
 import NormalCard from "./Cards/NormalCard";
+import DoctorCard from "./Cards/DoctorCard";
+import dayjs from "dayjs";
+import { useContext, useEffect } from "react";
+import { DoctorContext } from "./contexts/DoctorContext";
 
 export default function Home() {
+  const doctorContext = useContext(DoctorContext);
+  const todayDate = dayjs().format("DD-MM-YYYY");
+  console.log(todayDate);
+  const {
+    updateDoctor,
+    activeDoctorFetch,
+    name,
+    experience,
+    education,
+    department,
+  } = doctorContext;
+  useEffect(() => {
+    activeDoctorFetch(todayDate);
+  }, [todayDate]);
   return (
     <div className="w-full h-full">
-      <div className="md:h-[15vh] bg-[#F5F7FB] shadow-lg">
+      <div className="md:h-[13vh] bg-[#F5F7FB] shadow-lg">
         <img
-          className="w-[95px] m-auto"
+          className="w-[86px] m-auto border"
           src="https://cdn.discordapp.com/attachments/1158254691919077387/1164980252473307217/IMG_8985.jpg?ex=65452f68&is=6532ba68&hm=993fd57b7d135af309e3053ebeda10f51b61aa89747c9220b4de65b7dbc8a6ff&"
           alt=""
         />
@@ -64,8 +82,15 @@ export default function Home() {
             />
           </div>
           <div>
-            <div className=" w-[200px] mt-6 md:ml-24">
+            <div className="w-[200px] mt-6 md:ml-24">
               <p className="text-lg font-semibold">Today's active doctors</p>
+              <div className="w-[200px] bg-[#5068E9] h-[2px] mt-2"></div>
+            </div>
+            <div className="flex justify-around mt-6">
+              <DoctorCard />
+              <DoctorCard />
+              <DoctorCard />
+              <DoctorCard />
             </div>
           </div>
         </div>
