@@ -1,28 +1,25 @@
-import DepartmentCard from "@/Cards/DepartmentsCard";
-import { IconProps } from "@mui/material";
 // import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { DoctorContext } from "@/contexts/DoctorContext";
+import DepartmentCard from "@/Cards/DepartmentsCard";
 
 export interface Icon {
-  type: React.ComponentType<IconProps>;
+  type: React.ComponentType<any>;
   color: string;
   size: number;
 }
 export interface Departments {
   id: number;
   name: string;
-  icon: Icon;
-  route: string;
+  // icon: Icon;
 }
 
 const Department = () => {
-  const { department } = useContext(DoctorContext);
-  if (!department) return null;
-  // const [searchValue, setSearchValue] = useState("");
-  // const [origin, setOrigin] = useState(true);
-  // const [search, setSearch] = useState(false);
+  const { allDepartment } = useContext(DoctorContext);
+  console.log("all department", allDepartment);
+  if (!allDepartment) return null;
+
   return (
     <div className="flex flex-col">
       <div className="flex justify-between m-3">
@@ -38,17 +35,14 @@ const Department = () => {
       <div className="flex justify-around "></div>
 
       <div className="flex flex-row flex-wrap justify-between ">
-        {/* {department.map((item: Departments) => {
+        {allDepartment.map((i: Departments) => {
+          // const ActivateIcon = i.icon.type;
           return (
-            <div key={item.id}>
-              <DepartmentCard
-                name={item.name}
-                icon={item.icon}
-                route={item.route}
-              />
+            <div key={i.id}>
+              <DepartmentCard id={i.id} name={i.name} />
             </div>
           );
-        })} */}
+        })}
       </div>
       <div className="flex flex-row flex-wrap justify-between ">
         {/* {!search &&

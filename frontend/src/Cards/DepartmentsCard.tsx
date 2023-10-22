@@ -1,22 +1,25 @@
 import Paper from "@mui/material/Paper";
-import { Link } from "react-router-dom";
-import { IconProps } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 
 export interface Icon {
-  type: React.ComponentType<IconProps>;
+  type: React.ComponentType<any>;
   color: string;
   size: number;
 }
 export interface Props {
+  id: number;
   name: string;
-  icon: Icon;
-  route: string;
+  // icon: Icon;
 }
 
-const DepartmentCard = ({ name, icon, route }: Props) => {
-  const ActivateIcon = icon.type;
+const DepartmentCard = ({ id, name }: Props) => {
+  // const ActivateIcon = icon.type;
+  const navigate = useNavigate();
+  const handleRoute = (id: number) => {
+    navigate(`/departments/${id}`);
+  };
   return (
-    <Link to={route}>
+    <div onClick={() => handleRoute(id)}>
       <Paper
         sx={{
           width: 150,
@@ -28,11 +31,11 @@ const DepartmentCard = ({ name, icon, route }: Props) => {
         elevation={4}
       >
         <div className="flex flex-col justify-center items-center">
-          <ActivateIcon fontSize="large" />
+          {/* <ActivateIcon fontSize="large" /> */}
           <p className="text-sm mt-3">{name} Department</p>
         </div>
       </Paper>
-    </Link>
+    </div>
   );
 };
 

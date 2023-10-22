@@ -10,20 +10,20 @@ import { useContext, useEffect } from "react";
 import { DoctorContext } from "./contexts/DoctorContext";
 
 export default function Home() {
-  const doctorContext = useContext(DoctorContext);
+  const accessToken = localStorage.getItem("accessToken");
   const todayDate = dayjs().format("DD-MM-YYYY");
   console.log(todayDate);
   const {
-    updateDoctor,
     activeDoctorFetch,
+    updateDoctor,
     name,
     experience,
     education,
     department,
-  } = doctorContext;
+  } = useContext(DoctorContext);
   useEffect(() => {
     activeDoctorFetch(todayDate);
-  }, [todayDate]);
+  }, [accessToken]);
   return (
     <div className="w-full h-full">
       <div className="md:h-[13vh] bg-[#F5F7FB] shadow-lg">
