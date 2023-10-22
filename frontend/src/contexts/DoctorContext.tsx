@@ -9,9 +9,11 @@ interface DoctorInfo {
   availability: [];
   allDoctorByEachDepartment: [];
   allDepartment: [];
+  oneDoctor: [];
   activeDoctorFetch: (value: string) => void;
   fetchAllDepartment: () => void;
   fetchAllDoctor: (value: number) => void;
+  fetchOneDoctor: (value: number) => void;
   updateDoctor: (value: any) => void;
 }
 const defaultContext: DoctorInfo = {
@@ -22,9 +24,11 @@ const defaultContext: DoctorInfo = {
   availability: [],
   allDoctorByEachDepartment: [],
   allDepartment: [],
+  oneDoctor: [],
   activeDoctorFetch: () => {},
   fetchAllDepartment: () => {},
   fetchAllDoctor: (id) => {},
+  fetchOneDoctor: (id) => {},
   updateDoctor: () => {},
 };
 export const DoctorContext = createContext<DoctorInfo>(defaultContext);
@@ -40,6 +44,22 @@ const DoctorProvider = ({ children }: any) => {
   }, [accessToken]);
 
   const [doctorData, setDoctorData] = useState(defaultContext);
+
+  const fetchOneDoctor = async (id: number) => {
+    const token = localStorage.getItem("accessToken");
+    const response = await fetch(`http://localhost:5000/doctors/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    const { oneDoctor } = data;
+    setDoctorData({
+      ...data,
+      oneDoctor,
+    });
+  };
 
   const fetchAllDoctor = async (id: number) => {
     const token = localStorage.getItem("accessToken");
@@ -104,6 +124,7 @@ const DoctorProvider = ({ children }: any) => {
         activeDoctorFetch,
         fetchAllDepartment,
         fetchAllDoctor,
+        fetchOneDoctor,
       }}
     >
       {children}

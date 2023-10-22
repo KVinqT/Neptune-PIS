@@ -1,6 +1,6 @@
 // import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DoctorContext } from "@/contexts/DoctorContext";
 import DepartmentCard from "@/Cards/DepartmentsCard";
 
@@ -16,8 +16,12 @@ export interface Departments {
 }
 
 const Department = () => {
-  const { allDepartment } = useContext(DoctorContext);
+  const { allDepartment, fetchAllDepartment } = useContext(DoctorContext);
+  const accessToken = localStorage.getItem("accessToken");
   console.log("all department", allDepartment);
+  useEffect(() => {
+    fetchAllDepartment();
+  }, [accessToken]);
   if (!allDepartment) return null;
 
   return (
